@@ -1,0 +1,5 @@
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+STATIC_ROOT = '/home/pollair/static'                                                                                                            
+MEDIA_ROOT = '/home/pollair/media'
+pollair.pythonanywhere.com
