@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather</title>
+    <meta charset="utf-8">
+
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<style>
+
+#map { position: absolute; margin-left:480px;margin-top: 80px; width: 51.5%; height: 50%; text-align: center;}
+.mapboxgl-popup-content {
+
+    color:white;
+     margin: auto
+		}
+
+</style>
+</head>
+<body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+ <div class="name">
+        <center>PollAir</center>
+    </div>
+    <header>
+         <a href="{% url 'info' %}" class="nav-link px-2 text-white">Info</a>
+
+    </header>
+
+
+    <div class="weather">
+        <form  action="weather" method="POST">
+            {% csrf_token %}
+            {{ form }}
+        <input type="text" name="search" class="weather__search" placeholder="Twoje miasto">
+        </form>
+
+</form>
+        <div class="weather_today">
+            <div class="weather_details">
+
+                <h2 class="weather_city"> {{ weather.city}} <h6>{{ weather.local }}</h6> </h2>
+
+                <p class="weather_day">{{ weather.time }}</p>
+                <div class="weather_currunt">
+                    <p  class="weather__indicator weather__indicator--AQI" ><span class="value">(AQI) {{ weather.aqi }}</span> {% if weather.aqi  <= 50 %} Bardzo dobre powietrze {% elif weather.aqi  > 50 and weather.aqi  <= 100  %} Powietrze średniej jakości {% elif weather.aqi  > 100 and weather.aqi  <= 150  %} Niezdrowe dla grup wrażliwych {% elif weather.aqi  > 150 and weather.aqi  <= 200  %}Niezdrowe {% elif weather.aqi  > 200 and weather.aqi  <= 300  %}Bardzo niezdrowe{% elif weather.aqi  > 300    %}Deadly{% endif %}</p>
+                    <p  class="weather__indicator weather__indicator--PM10"><span class="value">{{ weather.aqi_pm10 }} </span>&micro;g/m&sup3;</p>
+                    <p  class="weather__indicator weather__indicator--PM25"><span class="value">{{ weather.aqi_pm25 }} </span>&micro;g/m&sup3;</p>
+                    <p  class="weather__indicator weather__indicator--O3"><span class="value">{{ weather.aqi_o3 }} </span>&micro;g/m&sup3;</p>
+                    <p  class="weather__indicator weather__indicator--No2"><span class="value">{{ weather.aqi_no2 }} </span>&micro;g/m&sup3;</p>
+                    <p  class="weather__indicator weather__indicator--So2"><span class="value">{{ weather.aqi_so2 }} </span>&micro;g/m&sup3;</p>
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="weather_temperature">
+
+                 <img src='http://openweathermap.org/img/wn/{{ weather.icon }}.png' alt="Clear sky" class="weather_image">
+                <span
+                        class="value">{{ weather.aqi_t }}
+
+                </span> &deg;C
+
+            </div>
+                  <div id="map">
+    <script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibmlraXRhMTIzMzIxIiwiYSI6ImNsYmU5MDFjczAxcHEzb25hZ2RmZDQyYW0ifQ.uWSDZEwjQhWDOJIvmxYEHA';
+    const map = new mapboxgl.Map({
+        container: 'map',
+
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [{{weather.log}}, {{weather.lan}}],
+        zoom: 13,
+
+
+});
+    const marker = new mapboxgl.Marker().setLngLat([{{weather.log}}, {{weather.lan}}]).setPopup(new mapboxgl.Popup().setHTML(`
+                        <table>
+                        <tr>
+
+
+                        </tr>
+                        <tr>
+                            <td>{{ weather.local }}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{ weather.name }}</td>
+
+                        </tr>
+                        <tr>
+                            <td><a href={{ weather.link }}>{{ weather.link }}</a></td>
+
+                        </tr>
+
+                        </table>
+                         `)).addTo(map);
+
+    marker.togglePopup();
+</script>
+</div>
+
+        </div>
+
+
+
+        <div class="weather__forecast">
+
+            <article class="weather__forecast_item">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon1 }}.png" alt="CLear sky" class="weather__forecast__icon">
+                <h3 class="weather__forecast_day">{{ weather.next_day1 }}</h3>
+                <p  class="weather__indicator__temperature"><span class="value">{{ weather.next_day_temperature1 }}</span> &deg;C</p>
+            </article>
+
+            <article class="weather__forecast_item">
+                <img src="http://openweathermap.org/img/w/{{ weather.icon2 }}.png" alt="CLear sky" class="weather__forecast__icon">
+                <h3 class="weather__forecast_day">{{ weather.next_day2 }}</h3>
+                <p  class="weather__indicator__temperature"><span class="value">{{ weather.next_day_temperature2 }}</span> &deg;C</p>
+            </article>
+
+            <article class="weather__forecast_item">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3 }}.png" alt="CLear sky" class="weather__forecast__icon">
+                <h3 class="weather__forecast_day">{{ weather.next_day3 }}</h3>
+                <p  class="weather__indicator__temperature"><span class="value">{{ weather.next_day_temperature3 }}</span> &deg;C</p>
+            </article>
+
+            <article class="weather__forecast_item">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon4 }}.png" alt="CLear sky" class="weather__forecast__icon">
+                <h3 class="weather__forecast_day">{{ weather.next_day4 }}</h3>
+                <p  class="weather__indicator__temperature"><span class="value">{{ weather.next_day_temperature4 }}</span> &deg;C</p>
+            </article>
+            <article class="weather__forecast_item">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon5 }}.png" alt="CLear sky" class="weather__forecast__icon">
+                <h3 class="weather__forecast_day">{{ weather.next_day5 }}</h3>
+                <p  class="weather__indicator__temperature"><span class="value">{{ weather.next_day_temperature5 }}</span> &deg;C</p>
+            </article>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
