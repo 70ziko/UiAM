@@ -17,7 +17,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 <style>
 
-#map { position: absolute; margin-left:480px;margin-top: 80px; width: 51.5%; height: 50%; text-align: center;}
+#map { 
+    position: absolute; 
+    margin-left: 35%;
+    margin-top: 5%; 
+    width: 45%; 
+    height: 40%; 
+    text-align: center;
+}
+
 .mapboxgl-popup-content {
 
     color:white;
@@ -30,7 +38,7 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
  <div class="name">
-        <center>PollAir</center>
+    <center><h1>PollAir</h1></center>
     </div>
     <header>
          <a href="{% url 'info' %}" class="nav-link px-2 text-white">Info</a>
@@ -53,7 +61,8 @@
 
                 <p class="weather_day">{{ weather.time }}</p>
                 <div class="weather_currunt">
-                    <p  class="weather__indicator weather__indicator--AQI" ><span class="value">(AQI) {{ weather.aqi }}</span> {% if weather.aqi  <= 50 %} Bardzo dobre powietrze {% elif weather.aqi  > 50 and weather.aqi  <= 100  %} Powietrze średniej jakości {% elif weather.aqi  > 100 and weather.aqi  <= 150  %} Niezdrowe dla grup wrażliwych {% elif weather.aqi  > 150 and weather.aqi  <= 200  %}Niezdrowe {% elif weather.aqi  > 200 and weather.aqi  <= 300  %}Bardzo niezdrowe{% elif weather.aqi  > 300    %}Deadly{% endif %}</p>
+                    <p  class="weather__indicator weather__indicator--AQI" ><span class="value">(AQI) {{ weather.aqi }}</span> {% if weather.aqi  <= 50 %} \
+                        Bardzo dobre powietrze {% elif weather.aqi  > 50 and weather.aqi  <= 100  %} Powietrze średniej jakości {% elif weather.aqi  > 100 and weather.aqi  <= 150  %} Niezdrowe dla grup wrażliwych {% elif weather.aqi  > 150 and weather.aqi  <= 200  %}Niezdrowe {% elif weather.aqi  > 200 and weather.aqi  <= 300  %}Bardzo niezdrowe{% elif weather.aqi  > 300    %}Deadly{% endif %}</p>
                     <p  class="weather__indicator weather__indicator--PM10"><span class="value">{{ weather.aqi_pm10 }} </span>&micro;g/m&sup3;</p>
                     <p  class="weather__indicator weather__indicator--PM25"><span class="value">{{ weather.aqi_pm25 }} </span>&micro;g/m&sup3;</p>
                     <p  class="weather__indicator weather__indicator--O3"><span class="value">{{ weather.aqi_o3 }} </span>&micro;g/m&sup3;</p>
@@ -65,8 +74,6 @@
             </div>
 
 
-
-
             <div class="weather_temperature">
 
                  <img src='http://openweathermap.org/img/wn/{{ weather.icon }}.png' alt="Clear sky" class="weather_image">
@@ -76,7 +83,7 @@
                 </span> &deg;C
 
             </div>
-                  <div id="map">
+            <div id="map">
     <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoibmlraXRhMTIzMzIxIiwiYSI6ImNsYmU5MDFjczAxcHEzb25hZ2RmZDQyYW0ifQ.uWSDZEwjQhWDOJIvmxYEHA';
     const map = new mapboxgl.Map({

@@ -7,8 +7,6 @@ from .forms import search_city
 
 # Create your views here.
 
-
-
 def index(request):
 
 
@@ -21,7 +19,7 @@ def index(request):
     cityname = 'Wroclaw'
     PARAMS = {'q': cityname, 'units': 'metric'}
     try:
-        response=requests.get(url='https://api.waqi.info/feed/here/?token=840733e07b0dd7eaafa5453a8dce5e1ff715e43e')
+        response = requests.get(url='https://api.waqi.info/feed/here/?token=840733e07b0dd7eaafa5453a8dce5e1ff715e43e')
         x = response.json()
 
         x['data']['aqi']
@@ -111,8 +109,6 @@ def index(request):
                     i += 1
 
 
-
-
             except:
                 try:
                     i = 0
@@ -123,8 +119,6 @@ def index(request):
                     i = 0
                     while r['list'][i]['dt_txt'] != str(str(year) + '-' + str(month) + '-' + '0' + str(den) + ' ' + '06:00:00'):
                         i += 1
-
-
 
 
         next_day.append(r['list'][i]['dt_txt'][:-8])
