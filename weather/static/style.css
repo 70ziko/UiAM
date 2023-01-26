@@ -29,6 +29,7 @@ table tr:nth-child(6){
 table tr:nth-child(7){
     background: rgba(139, 0, 0, 0.8);
 }
+
 header
 {
     width: 80%;
@@ -41,7 +42,7 @@ header
 }
 body {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     background-image: radial-gradient(circle,#1c7fc2 0%,#009cdc 28%,#0d9ade 32%,#011844 100%);
     color: #fff;
@@ -49,7 +50,6 @@ body {
     font-weight:300;
     font-size: 28px;
 }
-
 .weather
 {
     width: 80%;
@@ -69,7 +69,6 @@ body {
     font-size:20px;
     color: inherit;
 }
-
 .weather__search::placeholder
 {
     color:#ffffff;
@@ -88,10 +87,7 @@ body {
     align-self: center;
     margin-bottom:13px;
     margin-right:13px;
-
-
 }
-
 .weather_city
 {
     flex-wrap: nowrap;
@@ -182,7 +178,7 @@ body {
 .name
 {
     margin-top:5px;
-    font-size:10px;
+    font-size:60px;
 }
 .map
 {
@@ -190,6 +186,51 @@ body {
   color: black;
 }
 
+#map { 
+    position: absolute; 
+    margin-left: 35%;
+    margin-top: 5%; 
+    width: 45%; 
+    height: 40%; 
+    text-align: center;
+    border: 10px solid rgba(78, 172, 216, 0.5);
+    border-radius: 10px;
+}
+
+.mapboxgl-popup-content {
+
+    color:white;
+    margin: auto
+}
+
 .popup{
     color: black;
+}
+
+header {
+    background-color: rgb(255, 255, 255, 0.2);
+    border-radius: 10px;
+    margin: auto;
+    padding: 20px 5px 20px;
+    box-sizing: border-box;
+    min-width: 150px;
+    width: calc(20% - 20px);
+    flex-grow: 1;
+    text-align: center;
+}
+
+header:hover {
+    background-color: rgb(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin: auto;
+    padding: 20px 5px 20px;
+    box-sizing: border-box;
+    min-width: 150px;
+    width: calc(20% - 20px);
+    flex-grow: 1;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
 }
