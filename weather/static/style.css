@@ -62,12 +62,16 @@ body {
 }
 .weather__search
 {
-    width: 100%;
-    padding: 15px 10px;
-    border:none;
-    background-color:rgba(255,255,255,0.15);
-    font-size:20px;
+    position: absolute;
+    right: 10%;
+    top: 8.8%;
+    width: 60%;
+    padding: 26px 10px;
+    border: none;
+    background-color: rgba(255,255,255,0.15);
+    font-size: 20px;
     color: inherit;
+    border-radius: 10px;
 }
 .weather__search::placeholder
 {
@@ -210,7 +214,7 @@ body {
 header {
     background-color: rgb(255, 255, 255, 0.2);
     border-radius: 10px;
-    margin: auto;
+    margin: 0 10% auto;
     padding: 20px 5px 20px;
     box-sizing: border-box;
     min-width: 150px;
@@ -222,7 +226,7 @@ header {
 header:hover {
     background-color: rgb(255, 255, 255, 0.5);
     border-radius: 10px;
-    margin: auto;
+    margin: 0 10% auto;
     padding: 20px 5px 20px;
     box-sizing: border-box;
     min-width: 150px;
