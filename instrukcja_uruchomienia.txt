@@ -1,0 +1,17 @@
+Instrukcja odpalenia aplikacji:
+
+Należy mieć zainstalowany Python oraz pip
+
+Po zainstalowaniu (może być konieczne dodanie pythona do ścieżki %path na Windows) komenda:
+	
+	pip install -r requirements.txt
+	
+zainstaluje potrzebne biblioteki
+
+Następnie komenda:
+
+	python manage.py runserver
+lub
+	python3 manage.py runserver
+	
+uruchomi serwer aplikacji, a w terminalu wyświetli się link pod którym można ją odnaleźć
